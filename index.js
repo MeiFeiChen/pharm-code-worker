@@ -46,6 +46,7 @@ io.on('connection', (socket) => {
 
 
 testMysqlQueue.process(NUM_WORKERS, async({ data }) => {
+  console.log('process the mysql test data')
   const {
     problemId, language, code, socketId
   } = data
@@ -56,6 +57,7 @@ testMysqlQueue.process(NUM_WORKERS, async({ data }) => {
 })
 
 testProblemQueue.process(NUM_WORKERS, async({ data }) => {
+  console.log('process the test data')
   const {
     problemId, language, code, socketId
   } = data
