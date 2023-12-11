@@ -48,7 +48,7 @@ if (process.env.MODE === 'develop') {
   )
 }
 
-const NUM_WORKERS = 5
+const NUM_WORKERS = 2
 
 const mysqlPool = createPool({
   host: process.env.MYSQL_HOST,
