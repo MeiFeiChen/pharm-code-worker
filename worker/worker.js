@@ -61,7 +61,7 @@ const mysqlPool = createPool({
 // process problem
 problemQueue.process(NUM_WORKERS, async ({ data }) => {
   const { submittedId, language, code, addToQueueTime } = data
-  const workerGetJobTime = new Date()
+  const workerGetJobTime = Date.now()
   console.log(`Start process problem [ submitted ID: ${ submittedId }]`)
   // generate a file
   const filepath = generateFile(language, code)
@@ -110,7 +110,7 @@ problemQueue.process(NUM_WORKERS, async ({ data }) => {
     // calculate the average time and memory
     const results = await Promise.all(execFilePromises)
 
-    const getResultTime = new Date()
+    const getResultTime = Date.now()
     // Check if there are any WA results
     const hasWaResults = results.some((result) => result.status === 'WA')
 
@@ -129,12 +129,12 @@ problemQueue.process(NUM_WORKERS, async ({ data }) => {
     const avgMemory = (totalMemory / results.length).toFixed(1)
     console.log(avgTime, avgMemory)
 
-    const endTime = new Date()
-    const startToQueue = (workerGetJobTime - addToQueueTime)/1000 // queue 接到工作
-    const startToResult = (getResultTime - addToQueueTime)/1000 // 程式執行 + 驗證
-    const startToEnd = (endTime - addToQueueTime)/1000 // 全部程式執行時間
+    const endTime = Date.now()
+    const startToQueue = (workerGetJobTime - addToQueueTime) // queue 接到工作
+    const startToResult = (getResultTime - addToQueueTime) // 程式執行 + 驗證
+    const startToEnd = (endTime - addToQueueTime) // 全部程式執行時間
 
-    await createAcSubmission(submittedId, 'AC', language, avgTime, avgMemory)
+    await createAcSubmission(submittedId, 'AC', language, avgTime, avgMemory, startToQueue, startToResult, startToEnd)
   } catch (err) {
     console.log(err)
     console.error(err.message)

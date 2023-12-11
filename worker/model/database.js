@@ -31,15 +31,19 @@ if (process.env.MODE === 'develop') {
   })
 }
 
-export async function createAcSubmission(submittedId, result, language, runTime, memory) {
+export async function createAcSubmission(submittedId, result, language, runTime, memory, startToQueue, startToResult, startToEnd) {
+   console.log( startToQueue, startToResult, startToEnd)
   const client = await pool.connect()
   try {
     await client.query('BEGIN')
     await client.query(`
-        UPDATE submissions
-        SET status = $1
-        WHERE id = $2
-    `, [result, submittedId])
+      UPDATE submissions
+      SET status = $1,
+          startToQueue = $2,
+          startToResult = $3,
+          startToEnd = $4
+      WHERE id = $5
+    `, [result, startToQueue, startToResult, startToEnd, submittedId])
     await client.query(`
       INSERT INTO ac_results(submission_id, language, runtime, memory)
       VALUES ($1, $2, $3, $4)
