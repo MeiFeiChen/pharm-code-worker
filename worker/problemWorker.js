@@ -1,4 +1,4 @@
-import { problemQueue, mysqlQueue } from './model/bullQueue.js'
+import { problemQueue } from './model/bullQueue.js'
 
 import { generateFile, removeFile } from './utils/generateFile.js'
 
@@ -68,11 +68,6 @@ problemQueue.process(NUM_WORKERS, async ({ data }) => {
     const hasWaResults = results.some((result) => result.status === 'WA')
     if (hasWaResults) throw new WrongAnswerError(results)
 
-    // if (hasWaResults) {
-    //   const error = new WrongAnswerError()
-    //   error.message = results
-    //   throw error
-    // }
     const { totalTime, totalMemory } = results.reduce((acc, cur) => {
       const { time, memory } = cur
       acc.totalTime += time

@@ -92,8 +92,8 @@ problemQueue.process(NUM_WORKERS, async ({ data }) => {
     if (status === 'AC') {
       return await createAcSubmission(submittedId, status, language, avgTime, avgMemory)
     } else if (status === 'WA') {
-      await createWaReSubmission(submittedId, status, results)
-    }
+      return await createWaReSubmission(submittedId, status, results)
+    } 
     return await createWaReSubmission(submittedId, status, results[0])
   } catch (err) {
     console.error(err.message)
