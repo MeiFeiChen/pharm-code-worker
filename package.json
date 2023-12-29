@@ -5,8 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -22,5 +22,8 @@
     "socket.io": "^4.7.2",
     "table": "^6.8.1",
     "uuidv4": "^6.2.13"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }

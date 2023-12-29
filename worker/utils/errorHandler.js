@@ -18,6 +18,7 @@ export class WrongAnswerError extends Error {
   constructor(message) {
     super(message)
     this.name = 'WrongAnswerError'
+    this.message = message
     this.statusCode = 400
   }
 }
