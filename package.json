@@ -25,5 +25,10 @@
   },
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "codes/*"
+    ]
   }
 }
