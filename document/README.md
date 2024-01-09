@@ -6,7 +6,7 @@
 
 
   ### Docker Command Explanation:
-  ```
+  ```shell
   echo "1 2" | docker run -i -rm --name python_oj -v [path-name]:[path-name] online_python:latest timeout 1 /usr/bin/time -f '%e %M' python3 /app/sum.py
   ```
 
